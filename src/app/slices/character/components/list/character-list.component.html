@@ -1,0 +1,86 @@
+<div class="character-list container">
+  <h2 class="character-list__title text-center mb-4">Rick And Morty Characters</h2>
+
+  <div class="character-list__search row justify-content-center mb-3">
+    <div class="row">
+      <div class="col-3 text-center"></div>
+      <div class="col-6 text-center d-grid gap-2">
+        <button (click)="openCreateModal()" class="btn btn-success btn-lg mt-2">Create Character</button>
+      </div>
+    </div>
+    <p></p><p></p>
+    <div class="col-md-4 mb-2">
+      <input type="text" class="form-control" placeholder="Name" [(ngModel)]="filters.name" />
+    </div>
+    <div class="col-md-4 mb-2">
+      <select class="form-select" [(ngModel)]="filters.status">
+        <option value="undefined" selected disabled>Status</option>
+        <option value="Alive">Alive</option>
+        <option value="Dead">Dead</option>
+        <option value="unknown">Unknown</option>
+      </select>
+    </div>
+    <div class="col-md-4 mb-2">
+      <select class="form-select" [(ngModel)]="filters.gender">
+        <option value="undefined" selected disabled>Gender</option>
+        <option value="Female">Female</option>
+        <option value="Male">Male</option>
+        <option value="Genderless">Genderless</option>
+        <option value="unknown">Unknown</option>
+      </select>
+    </div>
+
+    <div class="col-12 text-center d-grid gap-2">
+      <button (click)="applyFilters()" class="btn btn-primary btn-lg">Search</button>
+    </div>
+  </div>
+
+  <!-- Character Cards -->
+  <div class="character-list__items row">
+    <div *ngFor="let character of characters" class="col-12 col-md-4">
+      <div *ngIf="character.name && character.name.trim()" class="character-list__item card mb-4">
+        <img [src]="character.image" class="card-img-top" alt="{{ character.name }}" />
+        <div class="card-body text-center">
+          <h3 class="character-list__name card-title">{{ character.name }}</h3>
+          <p class="character-list__status card-text">Status: {{ character.status }}</p>
+          <p class="character-list__species card-text">Species: {{ character.species }}</p>
+          <p class="character-list__gender card-text">Gender: {{ character.gender }}</p>
+          <!-- Disable buttons if character.type is not "NEW" -->
+          <button (click)="openEditModal(character)" class="btn btn-primary mx-1" [disabled]="character.type !== 'NEW'">
+            Edit
+          </button>
+          <button (click)="openDeleteModal(character)" class="btn btn-danger mx-1"
+            [disabled]="character.type !== 'NEW'">
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pagination Buttons -->
+  <div class="character-list__pagination text-center mt-4">
+    <button (click)="onPageChange(currentPage - 1)" class="btn btn-secondary" [disabled]="currentPage === 1">
+      Previous
+    </button>
+    <span class="mx-3">Page {{ currentPage }}</span>
+    <button (click)="onPageChange(currentPage + 1)" class="btn btn-secondary" [disabled]="!hasNextPage">
+      Next
+    </button>
+  </div>
+
+  <!-- Create Modal -->
+  <app-character-create-modal *ngIf="isCreateModalOpen" (characterCreated)="handleCharacterCreated($event)"
+    (close)="closeCreateModal()">
+  </app-character-create-modal>
+
+  <!-- Edit Modal -->
+  <app-character-edit-modal *ngIf="isEditModalOpen && selectedCharacter" [character]="selectedCharacter!"
+    (save)="saveCharacter($event)" (close)="closeEditModal()">
+  </app-character-edit-modal>
+
+  <!-- Delete Modal -->
+  <app-character-delete-modal *ngIf="isDeleteModalOpen && selectedCharacter" [character]="selectedCharacter!"
+    (confirm)="confirmDelete()" (close)="closeDeleteModal()">
+  </app-character-delete-modal>
+</div>

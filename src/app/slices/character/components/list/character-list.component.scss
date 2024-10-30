@@ -1,0 +1,50 @@
+.character-list {
+    &__title {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+  
+    &__search {
+      .form-control {
+        font-size: 1rem;
+        padding: 0.5rem;
+      }
+    }
+  
+    &__items {
+      .character-list__item {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        overflow: hidden;
+  
+        .card-title {
+          font-size: 1.25rem;
+          font-weight: bold;
+        }
+  
+        .card-text {
+          font-size: 0.9rem;
+          color: #555;
+        }
+  
+        .btn {
+          padding: 0.5rem 1rem;
+          font-size: 0.9rem;
+        }
+      }
+    }
+  
+    &__pagination {
+      .btn {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+        margin: 0.3rem;
+      }
+  
+      &__page-indicator {
+        font-weight: bold;
+        font-size: 1.1rem;
+      }
+    }
+  }
+  

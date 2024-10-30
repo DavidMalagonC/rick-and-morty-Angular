@@ -1,0 +1,40 @@
+<div class="character-form">
+    <h2>{{ character ? 'Edit Character' : 'Add New Character' }}</h2>
+  
+    <form [formGroup]="characterForm" (ngSubmit)="submitForm()">
+      <div class="character-form__field">
+        <label for="name">Name</label>
+        <input id="name" formControlName="name" />
+      </div>
+  
+      <div class="character-form__field">
+        <label for="status">Status</label>
+        <input id="status" formControlName="status" />
+      </div>
+  
+      <div class="character-form__field">
+        <label for="species">Species</label>
+        <input id="species" formControlName="species" />
+      </div>
+  
+      <div class="character-form__field">
+        <label for="type">Type</label>
+        <input id="type" formControlName="type" />
+      </div>
+  
+      <div class="character-form__field">
+        <label for="gender">Gender</label>
+        <input id="gender" formControlName="gender" />
+      </div>
+  
+      <div class="character-form__field">
+        <label for="image">Image URL</label>
+        <input id="image" formControlName="image" />
+      </div>
+  
+      <button type="submit" [disabled]="characterForm.invalid">
+        {{ character ? 'Update Character' : 'Add Character' }}
+      </button>
+    </form>
+  </div>
+  

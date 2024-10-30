@@ -1,0 +1,25 @@
+<div class="modal-overlay">
+  <div class="modal-content">
+    <h3>Create New Character</h3>
+    <form [formGroup]="characterForm" (ngSubmit)="submitForm()">
+      <input type="text" formControlName="name" placeholder="Name" class="form-control" />
+      <select formControlName="status" class="form-select">
+        <option value="Alive">Alive</option>
+        <option value="Dead">Dead</option>
+        <option value="unknown">Unknown</option>
+      </select>
+      <input type="text" formControlName="species" placeholder="Species" class="form-control" />
+      <select formControlName="gender" class="form-select">
+        <option value="Female">Female</option>
+        <option value="Male">Male</option>
+        <option value="Genderless">Genderless</option>
+        <option value="unknown">Unknown</option>
+      </select>
+      <input type="text" formControlName="image" placeholder="Image URL" class="form-control" />
+      <div class="modal-actions">
+        <button type="submit" class="btn btn-primary">Create</button>
+        <button type="button" (click)="closeModal()" class="btn btn-secondary">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
